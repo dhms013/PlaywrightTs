@@ -1,0 +1,15 @@
+{
+  "name": "playwrightTs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.6.2",
+    "dotenv": "^17.2.3"
+  },
+  "scripts": {
+    "test": "yarn playwright test ; yarn playwright show-report",
+    "ui":"yarn playwright test --ui; yarn playwright show-report"
+  }
+}
