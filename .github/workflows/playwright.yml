@@ -19,6 +19,16 @@ jobs:
       run: yarn playwright install --with-deps
     - name: Run Playwright tests
       run: yarn playwright test
+      env:
+          VALID_USER_USERNAME: ${{ secrets.VALID_USER_USERNAME }}
+          LOCKED_OUT_USER_USERNAME: ${{ secrets.LOCKED_OUT_USER_USERNAME }}
+          PROBLEM_USER_USERNAME: ${{ secrets.PROBLEM_USER_USERNAME }}
+          PERFORMANCE_GLITCH_USER_USERNAME: ${{ secrets.PERFORMANCE_GLITCH_USER_USERNAME }}
+          ERROR_USER_USERNAME: ${{ secrets.ERROR_USER_USERNAME }}
+          VISUAL_USER_USERNAME: ${{ secrets.VISUAL_USER_USERNAME }}
+          VALID_USER_PASSWORD: ${{ secrets.VALID_USER_PASSWORD }}
+          INVALID_USER_PASSWORD: ${{ secrets.INVALID_USER_PASSWORD }}
+          BASE_URL: ${{ secrets.BASE_URL }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
