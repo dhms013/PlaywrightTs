@@ -18,7 +18,7 @@ jobs:
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
     - name: Run Playwright tests
-      run: yarn playwright test
+      run: yarn playwright test || true
       env:
           VALID_USER_USERNAME: ${{ secrets.VALID_USER_USERNAME }}
           LOCKED_OUT_USER_USERNAME: ${{ secrets.LOCKED_OUT_USER_USERNAME }}

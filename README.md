@@ -111,8 +111,8 @@ playwrightTs/
 │   ├── InventoryPage.selectors.ts
 │   └── InventoryPage.ts
 ├── tests/                # Test specifications
-│   └── login.spec.ts
-│   └── dashboardFunction.spec.ts
+│   └── 1.login.spec.ts
+│   └── 2.dashboardFunction.spec.ts
 ├── package.json
 ├── playwright.config.ts
 ├── tsconfig.json
