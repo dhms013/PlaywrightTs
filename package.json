@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "yarn playwright test ; yarn playwright show-report",
-    "ui":"yarn playwright test --ui; yarn playwright show-report"
+    "ui": "yarn playwright test --ui",
+    "report": "yarn playwright show-report"
   }
 }
