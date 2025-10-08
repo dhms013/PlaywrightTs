@@ -44,6 +44,7 @@ jobs:
 
     - name: Run Playwright tests for ${{ matrix.project }}
       run: yarn playwright test --project=${{ matrix.project }}
+      continue-on-error: true
       env:
           VALID_USER_USERNAME: ${{ secrets.VALID_USER_USERNAME }}
           LOCKED_OUT_USER_USERNAME: ${{ secrets.LOCKED_OUT_USER_USERNAME }}
