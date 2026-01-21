@@ -8,42 +8,17 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project: [chromium, firefox, webkit]
     steps:
     - uses: actions/checkout@v4
-
-    - name: Cache node modules
-      uses: actions/cache@v4
-      id: cache-node-modules
+    - uses: actions/setup-node@v4
       with:
-        path: |
-          ~/.npm
-          node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
+        node-version: lts/*
     - name: Install dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile
-
-    - name: Cache Playwright browsers
-      uses: actions/cache@v4
-      id: cache-playwright-browsers
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-
-
+      run: npm ci
     - name: Install Playwright Browsers
-      if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
-      run: yarn playwright install --with-deps
-
-    - name: Run Playwright tests for ${{ matrix.project }}
-      run: yarn playwright test --project=${{ matrix.project }}
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
       continue-on-error: true
       env:
           VALID_USER_USERNAME: ${{ secrets.VALID_USER_USERNAME }}
@@ -56,8 +31,8 @@ jobs:
           INVALID_USER_PASSWORD: ${{ secrets.INVALID_USER_PASSWORD }}
           BASE_URL: ${{ secrets.BASE_URL }}
     - uses: actions/upload-artifact@v4
-      if: always()
+      if: ${{ !cancelled() }}
       with:
-        name: playwright-report-${{ matrix.project }}
+        name: playwright-report
         path: playwright-report/
         retention-days: 30

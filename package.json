@@ -1,16 +1,16 @@
 {
-  "name": "playwrightTs",
+  "name": "playwrightdhms",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
   "devDependencies": {
-    "@playwright/test": "^1.55.1",
-    "@types/node": "^24.6.2",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9",
     "dotenv": "^17.2.3"
-  },
-  "scripts": {
-    "test": "yarn playwright test ; yarn playwright show-report",
-    "ui": "yarn playwright test --ui",
-    "report": "yarn playwright show-report"
   }
 }

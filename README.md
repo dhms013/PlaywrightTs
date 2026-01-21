@@ -8,8 +8,6 @@ Welcome to my little backup spot on the internet. This repository is all about s
 - Before starting, make sure you've already installed the basic tools like Node.js, etc.
 - This repository tests the [SauceDemo Swag Labs](https://www.saucedemo.com/) application.
 - I save the credentials inside a '.env' file. So, you'll need to make one if you want to try my code.
-- I use 'yarn' (idk I just want to try using yarn 🤣)
-- When I started this project, the 'yarn create playwright' command didn't generate a `tsconfig.json` file, so you have to add it manually.
 
 ## Table of Contents
 
@@ -26,73 +24,18 @@ Welcome to my little backup spot on the internet. This repository is all about s
 ## Prerequisites
 
 Before you begin, ensure you have the following tools installed:
-- [Node.js (LTS version)](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
+### Option 1.
+- [Node.js](https://nodejs.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Playwright Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) (Highly Recommended)
+
+### Option 2.
+- You can just use any IDE (e.g. neovim, etc) for your text editor.
 
 ---
 
 ## Known Setup Issues & Solutions
-
-The `yarn create playwright` command is a great way to get started, but its behavior can be inconsistent across different environments. A common issue is that it may not generate all the necessary configuration files for a complete TypeScript setup.
-
-### 1. `tsconfig.json` is Not Generated
-
-**Problem:** The setup script creates `.ts` files but skips the interactive prompt and fails to generate a `tsconfig.json` file. This causes a flood of "Problems" and errors in VS Code (e.g., `Cannot find name 'process'`), because VS Code doesn't know how to interpret the TypeScript files.
-
-**Solution:** Manually create a `tsconfig.json` file in your project root with the following content. This is the standard, recommended configuration for a Playwright project.
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "types": ["node"],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
-}
-```
-
-### 2. `playwright.config.ts` is Incomplete
-
-**Problem:** The generated config may not be set up to handle environment variables from a `.env` file.
-
-**Solution:** Overwrite your `playwright.config.ts` with this robust configuration:
-
-```typescript
-import { defineConfig, devices } from '@playwright/test';
-import * as path from 'path';
-import * as dotenv from 'dotenv';
-
-// Load environment variables from .env file
-const envPath = path.resolve(__dirname, '.env');
-dotenv.config({ path: envPath });
-
-export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
-  use: {
-    baseURL: process.env.BASE_URL,
-    trace: 'on-first-retry',
-  },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-  ],
-});
-```
-
+I'm using Arch linux, where playwright not officially support the OS yet. So I just install with default options (using ubuntu libs.) and install playwright globally via [AUR](https://aur.archlinux.org/packages/playwright). I believe this setup is working well for windows or macOS. Just follow the [official documentation](https://playwright.dev/docs/intro#installing-playwright)
 ---
 
 ## Project Architecture
@@ -155,7 +98,7 @@ This repository covers the following essential Playwright and TypeScript concept
     ```
 2.  **Install dependencies:**
     ```bash
-    yarn install
+    npx playwright install
     ```
 3.  **Set up your environment:**
     -   Create a `.env` file in the root directory.
@@ -163,10 +106,24 @@ This repository covers the following essential Playwright and TypeScript concept
 4.  **Run the tests:**
     ```bash
     # This single command runs all tests and automatically opens the HTML report
-    yarn test
+    npx playwright test
     # Look the custom command list in the package.json file, or follow the command list from official website
     ```
 
+Note :
+You can always make an aliases to simplify the command line in the  [package.json](./package.json) file
+
+For the example, add this line :
+```
+"scripts": {
+    "test": "npx playwright test ; npx playwright show-report",
+    "ui": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  }
+```
+```
+```
+
 ### Option B: Write from Scratch
 
-If you want to build this project yourself, follow the steps in the official website and remember, a great AI assistant can guide you through it step-by-step! 😉 The key is to manually create the `tsconfig.json` and `playwright.config.ts` files if the setup script fails.
+If you want to build this project yourself, follow the steps in the official website and remember, a great AI assistant can guide you through it step-by-step! 😉. The key is read the documentations and don't 100% trust the AI, since AI is just a tools.

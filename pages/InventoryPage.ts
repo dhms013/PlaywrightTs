@@ -65,7 +65,7 @@ export class InventoryPage {
     await expect(this.page.locator(INVENTORY_PAGE_SELECTORS.TITLE)).toHaveText('Products');
   }
   async verifyExpectedProblemUser() {
-    await expect(this.page.locator(INVENTORY_PAGE_SELECTORS.INVENTORY_CONTAINER)).toHaveAttribute('src', '/static/media/sl-404.168b1cce.jpg');
+    await expect(this.page.locator(INVENTORY_PAGE_SELECTORS.INVENTORY_CONTAINER)).toHaveAttribute('src', '/static/media/sl-404.168b1cce10384b857a6f.jpg');
   }
   async verifyUnexpectedProblemUser() {
     await expect(this.page.locator(INVENTORY_PAGE_SELECTORS.INVENTORY_CONTAINER)).toHaveAttribute('src', 'sauce-backpack');
