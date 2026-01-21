@@ -105,9 +105,7 @@ This repository covers the following essential Playwright and TypeScript concept
     -   Copy the contents from `.env.example` and fill in your credentials.
 4.  **Run the tests:**
     ```bash
-    # This single command runs all tests and automatically opens the HTML report
     npx playwright test
-    # Look the custom command list in the package.json file, or follow the command list from official website
     ```
 
 Note :
