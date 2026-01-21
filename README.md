@@ -121,8 +121,6 @@ For the example, add this line :
     "report": "npx playwright show-report"
   }
 ```
-```
-```
 
 ### Option B: Write from Scratch
 
