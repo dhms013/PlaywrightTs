@@ -98,6 +98,7 @@ This repository covers the following essential Playwright and TypeScript concept
     ```
 2.  **Install dependencies:**
     ```bash
+    npm install
     npx playwright install
     ```
 3.  **Set up your environment:**
